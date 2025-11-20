@@ -505,516 +505,290 @@ async function generatePDF(questions, paperDetails, monthyear, midTermText, down
     document.body.removeChild(hiddenContainer);
 }
 
-// async function generateWord(questions, paperDetails, monthyear, midTermText, downloadButton, generatingNotification) {
-//     const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType, ImageRun, BorderStyle } = docx;
-
-//     let logoArrayBuffer;
-//     try {
-//         const logoResponse = await fetch('image.jpeg');
-//         logoArrayBuffer = await logoResponse.arrayBuffer();
-//     } catch (error) {
-//         console.error('Error fetching logo:', error);
-//         logoArrayBuffer = await (await fetch('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAvElEQVR4nO3YQQqDMBAF0L/KnW+/Q6+xu1oSLeI4DAgAAAAAAAAA7rZpm7Zt2/9eNpvNZrPZdrsdANxut9vt9nq9PgAwGo1Go9FoNBr9MabX6/U2m01mM5vNZnO5XC6X+wDAXC6Xy+VyuVwul8sFAKPRaDQajUaj0Wg0Go1Goz8A8Hg8Ho/H4/F4PB6Px+MBgMFoNBqNRqPRaDQajUaj0Wg0Go1Goz8AAAAAAAAA7rYBAK3eVREcAAAAAElFTkSuQmCC')).arrayBuffer();
-//     }
-
-//     const doc = new Document({
-//         sections: [{
-//             properties: {
-//                 page: { margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 } }
-//             },
-//             children: [
-//                 new Paragraph({
-//                     children: [
-//                         new TextRun({
-//                             text: `Subject Code: ${sessionStorage.getItem('subjectCode') || paperDetails.subjectCode}`,
-//                             bold: true,
-//                             font: 'Times New Roman'
-//                         })
-//                     ],
-//                     alignment: AlignmentType.LEFT,
-//                     spacing: { after: 100 }
-//                 }),
-//                 new Paragraph({
-//                     children: [
-//                         new ImageRun({
-//                             data: logoArrayBuffer,
-//                             transformation: { width: 600, height: 100 }
-//                         })
-//                     ],
-//                     alignment: AlignmentType.CENTER,
-//                     spacing: { after: 200 }
-//                 }),
-//                 new Paragraph({
-//                     children: [
-//                         new TextRun({
-//                             text: `B.Tech ${paperDetails.year} Year ${paperDetails.semester} Semester ${midTermText} Examinations ${monthyear}`,
-//                             bold: true,
-//                             size: 28,
-//                             font: 'Times New Roman'
-//                         })
-//                     ],
-//                     alignment: AlignmentType.CENTER,
-//                     spacing: { after: 100 }
-//                 }),
-//                 new Paragraph({
-//                     children: [
-//                         new TextRun({
-//                             text: `(${paperDetails.regulation} Regulation)`,
-//                             font: 'Times New Roman'
-//                         })
-//                     ],
-//                     alignment: AlignmentType.CENTER,
-//                     spacing: { after: 100 }
-//                 }),
-//                 new Table({
-//                     width: { size: 100, type: WidthType.PERCENTAGE },
-//                     borders: {
-//                         top: { style: BorderStyle.NONE },
-//                         bottom: { style: BorderStyle.NONE },
-//                         left: { style: BorderStyle.NONE },
-//                         right: { style: BorderStyle.NONE },
-//                         insideHorizontal: { style: BorderStyle.NONE },
-//                         insideVertical: { style: BorderStyle.NONE }
-//                     },
-//                     rows: [
-//                         new TableRow({
-//                             children: [
-//                                 new TableCell({
-//                                     width: { size: 50, type: WidthType.PERCENTAGE },
-//                                     children: [
-//                                         new Paragraph({
-//                                             children: [
-//                                                 new TextRun({
-//                                                     text: "Time: 90 Min.",
-//                                                     bold: true,
-//                                                     font: 'Times New Roman'
-//                                                 })
-//                                             ],
-//                                             alignment: AlignmentType.LEFT
-//                                         })
-//                                     ]
-//                                 }),
-//                                 new TableCell({
-//                                     width: { size: 50, type: WidthType.PERCENTAGE },
-//                                     children: [
-//                                         new Paragraph({
-//                                             children: [
-//                                                 new TextRun({
-//                                                     text: "Max Marks: 20",
-//                                                     bold: true,
-//                                                     font: 'Times New Roman'
-//                                                 })
-//                                             ],
-//                                             alignment: AlignmentType.RIGHT
-//                                         })
-//                                     ]
-//                                 })
-//                             ]
-//                         })
-//                     ]
-//                 }),
-//                 new Table({
-//                     width: { size: 100, type: WidthType.PERCENTAGE },
-//                     borders: {
-//                         top: { style: BorderStyle.NONE },
-//                         bottom: { style: BorderStyle.NONE },
-//                         left: { style: BorderStyle.NONE },
-//                         right: { style: BorderStyle.NONE },
-//                         insideHorizontal: { style: BorderStyle.NONE },
-//                         insideVertical: { style: BorderStyle.NONE }
-//                     },
-//                     rows: [
-//                         new TableRow({
-//                             children: [
-//                                 new TableCell({
-//                                     width: { size: 50, type: WidthType.PERCENTAGE },
-//                                     children: [
-//                                         new Paragraph({
-//                                             children: [
-//                                                 new TextRun({
-//                                                     text: `Subject: ${paperDetails.subject}`,
-//                                                     bold: true,
-//                                                     font: 'Times New Roman'
-//                                                 })
-//                                             ],
-//                                             alignment: AlignmentType.LEFT
-//                                         }),
-//                                         new Paragraph({
-//                                             children: [
-//                                                 new TextRun({
-//                                                     text: `Branch: ${sessionStorage.getItem('branch') || paperDetails.branch}`,
-//                                                     bold: true,
-//                                                     font: 'Times New Roman'
-//                                                 })
-//                                             ],
-//                                             alignment: AlignmentType.LEFT,
-//                                             spacing: { before: 50 }
-//                                         })
-//                                     ]
-//                                 }),
-//                                 new TableCell({
-//                                     width: { size: 50, type: WidthType.PERCENTAGE },
-//                                     children: [
-//                                         new Paragraph({
-//                                             children: [
-//                                                 new TextRun({
-//                                                     text: `Date: ${sessionStorage.getItem('examDate') || ''}`,
-//                                                     bold: true,
-//                                                     font: 'Times New Roman'
-//                                                 })
-//                                             ],
-//                                             alignment: AlignmentType.RIGHT
-//                                         })
-//                                     ]
-//                                 })
-//                             ]
-//                         })
-//                     ]
-//                 }),
-//                 new Paragraph({
-//                     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: '000000' } },
-//                     spacing: { after: 200 }
-//                 }),
-//                 new Paragraph({
-//                     children: [
-//                         new TextRun({ text: "Note: ", bold: true, font: 'Times New Roman' }),
-//                         new TextRun({ text: "Question paper consists of 2 ½ Units, Answer any 4 full questions out of 6 questions.", font: 'Times New Roman' })
-//                     ],
-//                     spacing: { after: 100 }
-//                 }),
-//                 new Paragraph({
-//                     children: [new TextRun({ text: "Each question carries 5 marks and may have sub-questions.", font: 'Times New Roman' })],
-//                     spacing: { after: 200 }
-//                 }),
-//                 new Table({
-//                     width: { size: 100, type: WidthType.PERCENTAGE },
-//                     borders: {
-//                         top: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-//                         bottom: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-//                         left: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-//                         right: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-//                         insideHorizontal: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
-//                         insideVertical: { style: BorderStyle.SINGLE, size: 6, color: '000000' }
-//                     },
-//                     rows: [
-//                         new TableRow({
-//                             children: [
-//                                 new TableCell({
-//                                     width: { size: 10, type: WidthType.PERCENTAGE },
-//                                     children: [new Paragraph({ text: "S. No",bold: true, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
-//                                 }),
-//                                 new TableCell({
-//                                     width: { size: 60, type: WidthType.PERCENTAGE },
-//                                     children: [new Paragraph({ text: "Question",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
-//                                 }),
-//                                 new TableCell({
-//                                     width: { size: 8, type: WidthType.PERCENTAGE },
-//                                     children: [new Paragraph({ text: "Unit",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
-//                                 }),
-//                                 new TableCell({
-//                                     width: { size: 12, type: WidthType.PERCENTAGE },
-//                                     children: [new Paragraph({ text: "B.T Level",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
-//                                 }),
-//                                 new TableCell({
-//                                     width: { size: 10, type: WidthType.PERCENTAGE },
-//                                     children: [new Paragraph({ text: "CO",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
-//                                 })
-//                             ],
-//                             tableHeader: true
-//                         }),
-//                         ...await Promise.all(questions.map(async (q, index) => {
-//                             const questionParts = q.question.split('<br>').map(part => part.trim()).filter(part => part.length > 0);
-//                             const cellChildren = questionParts.map(part => 
-//                                 new Paragraph({
-//                                     children: [new TextRun({ text: part, font: 'Times New Roman' })],
-//                                     alignment: AlignmentType.JUSTIFY
-//                                 })
-//                             );
-
-//                             if (q.imageDataUrl) {
-//                                 try {
-//                                     const response = await fetch(q.imageDataUrl);
-//                                     const arrayBuffer = await response.arrayBuffer();
-//                                     cellChildren.push(
-//                                         new Paragraph({
-//                                             children: [
-//                                                 new ImageRun({
-//                                                     data: arrayBuffer,
-//                                                     transformation: { width: 200, height: 200 }
-//                                                 })
-//                                             ],
-//                                             alignment: AlignmentType.CENTER,
-//                                             spacing: { before: 100 }
-//                                         })
-//                                     );
-//                                 } catch (error) {
-//                                     console.error(`Error loading image for question ${index + 1}:`, error);
-//                                     cellChildren.push(new Paragraph({ text: "[Image could not be loaded]", font: 'Times New Roman' }));
-//                                 }
-//                             }
-
-//                             return new TableRow({
-//                                 children: [
-//                                     new TableCell({
-//                                         width: { size: 10, type: WidthType.PERCENTAGE },
-//                                         children: [new Paragraph({ text: `${index + 1}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
-//                                     }),
-//                                     new TableCell({
-//                                         width: { size: 60, type: WidthType.PERCENTAGE },
-//                                         children: cellChildren
-//                                     }),
-//                                     new TableCell({
-//                                         width: { size: 8, type: WidthType.PERCENTAGE },
-//                                         children: [new Paragraph({ text: `${q.unit}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
-//                                     }),
-//                                     new TableCell({
-//                                         width: { size: 12, type: WidthType.PERCENTAGE },
-//                                         children: [new Paragraph({ text: q.btLevel || "N/A", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
-//                                     }),
-//                                     new TableCell({
-//                                         width: { size: 10, type: WidthType.PERCENTAGE },
-//                                         children: [new Paragraph({ text: getCOValue(q.unit), alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
-//                                     })
-//                                 ]
-//                             });
-//                         }))
-//                     ]
-//                 }),
-//                 new Paragraph({
-//                     children: [new TextRun({ text: "****ALL THE BEST****", bold: true, font: 'Times New Roman' })],
-//                     alignment: AlignmentType.CENTER,
-//                     spacing: { before: 400 }
-//                 })
-//             ]
-//         }]
-//     });
 async function generateWord(questions, paperDetails, monthyear, midTermText, downloadButton, generatingNotification) {
     const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType, ImageRun, BorderStyle } = docx;
 
-    // === Fetch Logo (with fallback) ===
     let logoArrayBuffer;
     try {
         const logoResponse = await fetch('image.jpeg');
-        if (!logoResponse.ok) throw new Error('Logo not found');
         logoArrayBuffer = await logoResponse.arrayBuffer();
     } catch (error) {
-        console.warn('Local logo not found, using fallback logo');
-        const fallbackResponse = await fetch('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAvElEQVR4nO3YQQqDMBAF0L/KnW+/Q6+xu1oSLeI4DAgAAAAAAAAA7rZpm7Zt2/9eNpvNZrPZdrsdANxut9vt9nq9PgAwGo1Go9FoNBr9MabX6/U2m01mM5vNZnO5XC6X+wDAXC6Xy+VyuVwul8sFAKPRaDQajUaj0Wg0Go1Goz8A8Hg8Ho/H4/F4PB6Px+MBgMFoNBqNRqPRaDQajUaj0Wg0Go1Goz8AAAAAAAAA7rYBAK3eVREcAAAAAElFTkSuQmCC');
-        logoArrayBuffer = await fallbackResponse.arrayBuffer();
+        console.error('Error fetching logo:', error);
+        logoArrayBuffer = await (await fetch('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAvElEQVR4nO3YQQqDMBAF0L/KnW+/Q6+xu1oSLeI4DAgAAAAAAAAA7rZpm7Zt2/9eNpvNZrPZdrsdANxut9vt9nq9PgAwGo1Go9FoNBr9MabX6/U2m01mM5vNZnO5XC6X+wDAXC6Xy+VyuVwul8sFAKPRaDQajUaj0Wg0Go1Goz8A8Hg8Ho/H4/F4PB6Px+MBgMFoNBqNRqPRaDQajUaj0Wg0Go1Goz8AAAAAAAAA7rYBAK3eVREcAAAAAElFTkSuQmCC')).arrayBuffer();
     }
 
-    // === Create Document ===
     const doc = new Document({
         sections: [{
             properties: {
-                page: {
-                    margin: { top: 1000, bottom: 1000, left: 1200, right: 1200 }
-                }
+                page: { margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 } }
             },
             children: [
-                // Subject Code
                 new Paragraph({
-                    children: [new TextRun({
-                        text: `Subject Code: ${sessionStorage.getItem('subjectCode') || paperDetails.subjectCode}`,
-                        bold: true,
-                        size: 24,
-                        font: 'Times New Roman'
-                    })],
+                    children: [
+                        new TextRun({
+                            text: `Subject Code: ${sessionStorage.getItem('subjectCode') || paperDetails.subjectCode}`,
+                            bold: true,
+                            font: 'Times New Roman'
+                        })
+                    ],
                     alignment: AlignmentType.LEFT,
+                    spacing: { after: 100 }
+                }),
+                new Paragraph({
+                    children: [
+                        new ImageRun({
+                            data: logoArrayBuffer,
+                            transformation: { width: 600, height: 100 }
+                        })
+                    ],
+                    alignment: AlignmentType.CENTER,
                     spacing: { after: 200 }
                 }),
-
-                // College Logo
                 new Paragraph({
-                    children: [new ImageRun({
-                        data: logoArrayBuffer,
-                        transformation: { width: 580, height: 100 }
-                    })],
-                    alignment: AlignmentType.CENTER,
-                    spacing: { after: 300 }
-                }),
-
-                // Main Title
-                new Paragraph({
-                    children: [new TextRun({
-                        text: `B.Tech ${paperDetails.year} Year ${paperDetails.semester} Semester ${midTermText} Examinations ${monthyear}`,
-                        bold: true,
-                        size: 28,
-                        font: 'Times New Roman'
-                    })],
+                    children: [
+                        new TextRun({
+                            text: `B.Tech ${paperDetails.year} Year ${paperDetails.semester} Semester ${midTermText} Examinations ${monthyear}`,
+                            bold: true,
+                            size: 28,
+                            font: 'Times New Roman'
+                        })
+                    ],
                     alignment: AlignmentType.CENTER,
                     spacing: { after: 100 }
                 }),
-
                 new Paragraph({
-                    children: [new TextRun({
-                        text: `(${paperDetails.regulation} Regulation)`,
-                        size: 24,
-                        font: 'Times New Roman'
-                    })],
-                    alignment: AlignmentType.CENTER,
-                    spacing: { after: 300 }
-                }),
-
-                // Time & Marks Row
-                new Table({
-                    width: { size: 100, type: WidthType.PERCENTAGE },
-                    borders: { top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE }, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE }, insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE } },
-                    rows: [
-                        new TableRow({
-                            children: [
-                                new TableCell({
-                                    width: { size: 50, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ children: [new TextRun({ text: "Time: 90 Min.", bold: true, size: 24, font: 'Times New Roman' })], alignment: AlignmentType.LEFT })]
-                                }),
-                                new TableCell({
-                                    width: { size: 50, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ children: [new TextRun({ text: "Max Marks: 20", bold: true, size: 24, font: 'Times New Roman' })], alignment: AlignmentType.RIGHT })]
-                                })
-                            ]
+                    children: [
+                        new TextRun({
+                            text: `(${paperDetails.regulation} Regulation)`,
+                            font: 'Times New Roman'
                         })
-                    ]
+                    ],
+                    alignment: AlignmentType.CENTER,
+                    spacing: { after: 100 }
                 }),
-
-                // Subject & Branch + Date Row
                 new Table({
                     width: { size: 100, type: WidthType.PERCENTAGE },
-                    borders: { top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE }, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE }, insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE } },
+                    borders: {
+                        top: { style: BorderStyle.NONE },
+                        bottom: { style: BorderStyle.NONE },
+                        left: { style: BorderStyle.NONE },
+                        right: { style: BorderStyle.NONE },
+                        insideHorizontal: { style: BorderStyle.NONE },
+                        insideVertical: { style: BorderStyle.NONE }
+                    },
                     rows: [
                         new TableRow({
                             children: [
                                 new TableCell({
                                     width: { size: 50, type: WidthType.PERCENTAGE },
                                     children: [
-                                        new Paragraph({ children: [new TextRun({ text: `Subject: ${paperDetails.subject}`, bold: true, size: 24, font: 'Times New Roman' })], alignment: AlignmentType.LEFT }),
-                                        new Paragraph({ children: [new TextRun({ text: `Branch: ${sessionStorage.getItem('branch') || paperDetails.branch}`, bold: true, size: 24, font: 'Times New Roman' })], alignment: AlignmentType.LEFT, spacing: { before: 100 } })
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: "Time: 90 Min.",
+                                                    bold: true,
+                                                    font: 'Times New Roman'
+                                                })
+                                            ],
+                                            alignment: AlignmentType.LEFT
+                                        })
                                     ]
                                 }),
                                 new TableCell({
                                     width: { size: 50, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ children: [new TextRun({ text: `Date: ${sessionStorage.getItem('examDate') || ''}`, bold: true, size: 24, font: 'Times New Roman' })], alignment: AlignmentType.RIGHT })]
+                                    children: [
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: "Max Marks: 20",
+                                                    bold: true,
+                                                    font: 'Times New Roman'
+                                                })
+                                            ],
+                                            alignment: AlignmentType.RIGHT
+                                        })
+                                    ]
                                 })
                             ]
                         })
                     ]
                 }),
-
-                // Divider Line
-                new Paragraph({
-                    border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "000000" } },
-                    spacing: { after: 300 }
-                }),
-
-                // Instructions
-                new Paragraph({
-                    children: [
-                        new TextRun({ text: "Note: ", bold: true, size: 24, font: 'Times New Roman' }),
-                        new TextRun({ text: "Question paper consists of 2 ½ Units, Answer any 4 full questions out of 6 questions.", size: 24, font: 'Times New Roman' })
-                    ],
-                    spacing: { after: 150 }
-                }),
-
-                new Paragraph({
-                    children: [new TextRun({ text: "Each question carries 5 marks and may have sub-questions.", size: 24, font: 'Times New Roman' })],
-                    spacing: { after: 300 }
-                }),
-
-                // Main Questions Table
                 new Table({
                     width: { size: 100, type: WidthType.PERCENTAGE },
                     borders: {
-                        top: { style: BorderStyle.SINGLE, size: 8, color: "000000" },
-                        bottom: { style: BorderStyle.SINGLE, size: 8, color: "000000" },
-                        left: { style: BorderStyle.SINGLE, size: 8, color: "000000" },
-                        right: { style: BorderStyle.SINGLE, size: 8, color: "000000" },
-                        insideHorizontal: { style: BorderStyle.SINGLE, size: 4, color: "000000" },
-                        insideVertical: { style: BorderStyle.SINGLE, size: 4, color: "000000" }
+                        top: { style: BorderStyle.NONE },
+                        bottom: { style: BorderStyle.NONE },
+                        left: { style: BorderStyle.NONE },
+                        right: { style: BorderStyle.NONE },
+                        insideHorizontal: { style: BorderStyle.NONE },
+                        insideVertical: { style: BorderStyle.NONE }
                     },
                     rows: [
-                        // Table Header
                         new TableRow({
                             children: [
-                                new TableCell({ width: { size: 8, type: WidthType.PERCENTAGE }, children: [new Paragraph({ text: "S.No", bold: true, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                new TableCell({ width: { size: 58, type: WidthType.PERCENTAGE }, children: [new Paragraph({ text: "Question", bold: true, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                new TableCell({ width: { size: 10, type: WidthType.PERCENTAGE }, children: [new Paragraph({ text: "Unit", bold: true, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                new TableCell({ width: { size: 12, type: WidthType.PERCENTAGE }, children: [new Paragraph({ text: "B.T Level", bold: true, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                new TableCell({ width: { size: 12, type: WidthType.PERCENTAGE }, children: [new Paragraph({ text: "CO", bold: true, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] })
+                                new TableCell({
+                                    width: { size: 50, type: WidthType.PERCENTAGE },
+                                    children: [
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: `Subject: ${paperDetails.subject}`,
+                                                    bold: true,
+                                                    font: 'Times New Roman'
+                                                })
+                                            ],
+                                            alignment: AlignmentType.LEFT
+                                        }),
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: `Branch: ${sessionStorage.getItem('branch') || paperDetails.branch}`,
+                                                    bold: true,
+                                                    font: 'Times New Roman'
+                                                })
+                                            ],
+                                            alignment: AlignmentType.LEFT,
+                                            spacing: { before: 50 }
+                                        })
+                                    ]
+                                }),
+                                new TableCell({
+                                    width: { size: 50, type: WidthType.PERCENTAGE },
+                                    children: [
+                                        new Paragraph({
+                                            children: [
+                                                new TextRun({
+                                                    text: `Date: ${sessionStorage.getItem('examDate') || ''}`,
+                                                    bold: true,
+                                                    font: 'Times New Roman'
+                                                })
+                                            ],
+                                            alignment: AlignmentType.RIGHT
+                                        })
+                                    ]
+                                })
                             ]
+                        })
+                    ]
+                }),
+                new Paragraph({
+                    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: '000000' } },
+                    spacing: { after: 200 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Note: ", bold: true, font: 'Times New Roman' }),
+                        new TextRun({ text: "Question paper consists of 2 ½ Units, Answer any 4 full questions out of 6 questions.", font: 'Times New Roman' })
+                    ],
+                    spacing: { after: 100 }
+                }),
+                new Paragraph({
+                    children: [new TextRun({ text: "Each question carries 5 marks and may have sub-questions.", font: 'Times New Roman' })],
+                    spacing: { after: 200 }
+                }),
+                new Table({
+                    width: { size: 100, type: WidthType.PERCENTAGE },
+                    borders: {
+                        top: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
+                        bottom: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
+                        left: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
+                        right: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
+                        insideHorizontal: { style: BorderStyle.SINGLE, size: 6, color: '000000' },
+                        insideVertical: { style: BorderStyle.SINGLE, size: 6, color: '000000' }
+                    },
+                    rows: [
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    width: { size: 10, type: WidthType.PERCENTAGE },
+                                    children: [new Paragraph({ text: "S. No",bold: true, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
+                                }),
+                                new TableCell({
+                                    width: { size: 60, type: WidthType.PERCENTAGE },
+                                    children: [new Paragraph({ text: "Question",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
+                                }),
+                                new TableCell({
+                                    width: { size: 8, type: WidthType.PERCENTAGE },
+                                    children: [new Paragraph({ text: "Unit",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
+                                }),
+                                new TableCell({
+                                    width: { size: 12, type: WidthType.PERCENTAGE },
+                                    children: [new Paragraph({ text: "B.T Level",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
+                                }),
+                                new TableCell({
+                                    width: { size: 10, type: WidthType.PERCENTAGE },
+                                    children: [new Paragraph({ text: "CO",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
+                                })
+                            ],
+                            tableHeader: true
                         }),
-
-                        // Questions Rows
                         ...await Promise.all(questions.map(async (q, index) => {
-                            const parts = q.question.split('<br>').map(p => p.trim()).filter(p => p);
-
-                            const questionParagraphs = parts.map(part => new Paragraph({
-                                children: [new TextRun({
-                                    text: part.startsWith('(') || /^\d+\./.test(part) ? part : part,
-                                    size: 24, // 12pt
-                                    font: 'Times New Roman'
-                                })],
-                                alignment: AlignmentType.JUSTIFY,
-                                spacing: { line: 340 } // ~1.15 line spacing
-                            }));
+                            const questionParts = q.question.split('<br>').map(part => part.trim()).filter(part => part.length > 0);
+                            const cellChildren = questionParts.map(part => 
+                                new Paragraph({
+                                    children: [new TextRun({ text: part, font: 'Times New Roman' })],
+                                    alignment: AlignmentType.JUSTIFY
+                                })
+                            );
 
                             if (q.imageDataUrl) {
                                 try {
-                                    const imgRes = await fetch(q.imageDataUrl);
-                                    const imgBuffer = await imgRes.arrayBuffer();
-                                    questionParagraphs.push(
+                                    const response = await fetch(q.imageDataUrl);
+                                    const arrayBuffer = await response.arrayBuffer();
+                                    cellChildren.push(
                                         new Paragraph({
-                                            children: [new ImageRun({
-                                                data: imgBuffer,
-                                                transformation: { width: 450, height: 280 }
-                                            })],
+                                            children: [
+                                                new ImageRun({
+                                                    data: arrayBuffer,
+                                                    transformation: { width: 200, height: 200 }
+                                                })
+                                            ],
                                             alignment: AlignmentType.CENTER,
-                                            spacing: { before: 200, after: 200 }
+                                            spacing: { before: 100 }
                                         })
                                     );
-                                } catch (err) {
-                                    questionParagraphs.push(new Paragraph({
-                                        children: [new TextRun({ text: "[Image could not be loaded]", size: 24, color: "FF0000" })]
-                                    }));
+                                } catch (error) {
+                                    console.error(`Error loading image for question ${index + 1}:`, error);
+                                    cellChildren.push(new Paragraph({ text: "[Image could not be loaded]", font: 'Times New Roman' }));
                                 }
                             }
 
                             return new TableRow({
                                 children: [
-                                    new TableCell({ children: [new Paragraph({ text: `${index + 1}`, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                    new TableCell({ children: questionParagraphs, margins: { top: 100, bottom: 100, left: 100, right: 100 } }),
-                                    new TableCell({ children: [new Paragraph({ text: q.unit, size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                    new TableCell({ children: [new Paragraph({ text: q.btLevel || "N/A", size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] }),
-                                    new TableCell({ children: [new Paragraph({ text: getCOValue(q.unit), size: 24, font: 'Times New Roman', alignment: AlignmentType.CENTER })] })
+                                    new TableCell({
+                                        width: { size: 10, type: WidthType.PERCENTAGE },
+                                        children: [new Paragraph({ text: `${index + 1}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
+                                    }),
+                                    new TableCell({
+                                        width: { size: 60, type: WidthType.PERCENTAGE },
+                                        children: cellChildren
+                                    }),
+                                    new TableCell({
+                                        width: { size: 8, type: WidthType.PERCENTAGE },
+                                        children: [new Paragraph({ text: `${q.unit}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
+                                    }),
+                                    new TableCell({
+                                        width: { size: 12, type: WidthType.PERCENTAGE },
+                                        children: [new Paragraph({ text: q.btLevel || "N/A", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
+                                    }),
+                                    new TableCell({
+                                        width: { size: 10, type: WidthType.PERCENTAGE },
+                                        children: [new Paragraph({ text: getCOValue(q.unit), alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
+                                    })
                                 ]
                             });
                         }))
                     ]
                 }),
-
-                // All the Best
                 new Paragraph({
-                    children: [new TextRun({ text: "**** ALL THE BEST ****", bold: true, size: 28, font: 'Times New Roman' })],
+                    children: [new TextRun({ text: "****ALL THE BEST****", bold: true, font: 'Times New Roman' })],
                     alignment: AlignmentType.CENTER,
-                    spacing: { before: 600 }
+                    spacing: { before: 400 }
                 })
             ]
         }]
     });
 
-    // === Generate and Download ===
-    const blob = await Packer.toBlob(doc);
-    const fileName = `${paperDetails.subjectCode || 'QuestionPaper'}_${midTermText.replace(/\s+/g, '')}_${monthyear.replace(/\s+/g, '')}.docx`;
-    saveAs(blob, fileName);
-
-    // UI Feedback
-    if (downloadButton) downloadButton.disabled = false;
-    if (generatingNotification) generatingNotification.style.display = 'none';
-}
-
-// Helper function (you probably already have this)
-function getCOValue(unit) {
-    const mapping = { "I": "CO1", "II": "CO2", "III": "CO3", "IV": "CO4", "V": "CO5" };
-    return mapping[unit] || "CO?";
-}
 
     const blob = await Packer.toBlob(doc);
     const link = document.createElement('a');
