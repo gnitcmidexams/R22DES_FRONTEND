@@ -701,23 +701,23 @@ async function generateWord(questions, paperDetails, monthyear, midTermText, dow
                             children: [
                                 new TableCell({
                                     width: { size: 10, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ text: "S. No", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
+                                    children: [new Paragraph({ text: "S. No",bold: true, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
                                 }),
                                 new TableCell({
                                     width: { size: 60, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ text: "Question", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24  })]
+                                    children: [new Paragraph({ text: "Question",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
                                 }),
                                 new TableCell({
                                     width: { size: 8, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ text: "Unit", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24  })]
+                                    children: [new Paragraph({ text: "Unit",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
                                 }),
                                 new TableCell({
                                     width: { size: 12, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ text: "B.T Level", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24  })]
+                                    children: [new Paragraph({ text: "B.T Level",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
                                 }),
                                 new TableCell({
                                     width: { size: 10, type: WidthType.PERCENTAGE },
-                                    children: [new Paragraph({ text: "CO", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24  })]
+                                    children: [new Paragraph({ text: "CO",bold: true, alignment: AlignmentType.CENTER, font: 'Times New Roman', size: 24  })]
                                 })
                             ],
                             tableHeader: true
@@ -757,7 +757,7 @@ async function generateWord(questions, paperDetails, monthyear, midTermText, dow
                                 children: [
                                     new TableCell({
                                         width: { size: 10, type: WidthType.PERCENTAGE },
-                                        children: [new Paragraph({ text: `${index + 1}`, alignment: AlignmentType.CENTER, font: 'Times New Roman' })]
+                                        children: [new Paragraph({ text: `${index + 1}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
                                     }),
                                     new TableCell({
                                         width: { size: 60, type: WidthType.PERCENTAGE },
@@ -765,15 +765,15 @@ async function generateWord(questions, paperDetails, monthyear, midTermText, dow
                                     }),
                                     new TableCell({
                                         width: { size: 8, type: WidthType.PERCENTAGE },
-                                        children: [new Paragraph({ text: `${q.unit}`, alignment: AlignmentType.CENTER, font: 'Times New Roman' })]
+                                        children: [new Paragraph({ text: `${q.unit}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
                                     }),
                                     new TableCell({
                                         width: { size: 12, type: WidthType.PERCENTAGE },
-                                        children: [new Paragraph({ text: q.btLevel || "N/A", alignment: AlignmentType.CENTER, font: 'Times New Roman' })]
+                                        children: [new Paragraph({ text: q.btLevel || "N/A", alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
                                     }),
                                     new TableCell({
                                         width: { size: 10, type: WidthType.PERCENTAGE },
-                                        children: [new Paragraph({ text: getCOValue(q.unit), alignment: AlignmentType.CENTER, font: 'Times New Roman' })]
+                                        children: [new Paragraph({ text: getCOValue(q.unit), alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
                                     })
                                 ]
                             });
