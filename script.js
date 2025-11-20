@@ -757,7 +757,7 @@ async function generateWord(questions, paperDetails, monthyear, midTermText, dow
                                 children: [
                                     new TableCell({
                                         width: { size: 10, type: WidthType.PERCENTAGE },
-                                        children: [new TextRun({ text: `${index + 1}`,  font: 'Times New Roman',alignment: AlignmentType.JUSTIFY, size: 24 })]
+                                        children: [new Paragraph({ text: `${index + 1}`, alignment: AlignmentType.JUSTIFY, font: 'Times New Roman', size: 24 })]
                                         // children: [new Paragraph({children:[new TextRun({ text: `${index + 1}`,  font: 'Times New Roman', size: 24 })],alignment: AlignmentType.JUSTIFY})]
                                     }),
                                     new TableCell({
